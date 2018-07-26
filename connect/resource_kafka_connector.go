@@ -47,7 +47,7 @@ func connectorCreate(d *schema.ResourceData, meta interface{}) error {
 
 	connectorResponse, err := c.CreateConnector(req, true)
 	if err != nil {
-		fmt.Printf(err)
+		fmt.Printf("[ERROR] Error %s", err.Error())
 		return err
 	}
 	fmt.Printf("[INFO] Created the connector %v\n", connectorResponse)
@@ -70,7 +70,7 @@ func connectorDelete(d *schema.ResourceData, meta interface{}) error {
 	fmt.Printf("[INFO] Deleting the connector %s\n", name)
 	_, err := c.DeleteConnector(req, true)
 	if err != nil {
-		fmt.Printf(err)
+		fmt.Printf("[ERROR] Error %s", err.Error())
 		return err
 	}
 	fmt.Printf("[INFO] Connector %s deleted\n", name)
@@ -94,7 +94,7 @@ func connectorUpdate(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("[INFO] Looking for %s", name)
 	conn, err := c.UpdateConnector(req, true)
 	if err != nil {
-		fmt.Printf(err)
+		fmt.Printf("[ERROR] Error %s", err.Error())
 		return err
 	}
 	log.Printf("[INFO] Config updated %v", conn.Config)
@@ -112,7 +112,7 @@ func connectorRead(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("[INFO] Looking for %s", name)
 	conn, err := c.GetConnector(req)
 	if err != nil {
-		fmt.Printf(err)
+		fmt.Printf("[ERROR] Error %s", err.Error())
 		return err
 	}
 
@@ -128,7 +128,7 @@ func configFromRD(d *schema.ResourceData) map[string]string {
 	for k, v := range cfg {
 		switch v := v.(type) {
 		case string:
-			config[k.(string)] = v.(string)
+			config[k] = v
 		}
 	}
 

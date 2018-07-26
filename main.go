@@ -1,8 +1,8 @@
 package main
 
 import (
-	c "github.com/Mongey/terraform-provider-kafka-connect/connect"
 	"github.com/hashicorp/terraform/plugin"
+	c "github.com/spothero/terraform-provider-kafka-connect/connect"
 )
 
 func main() {
